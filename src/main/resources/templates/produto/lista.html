@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="/vendor/bootstrap/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.css"
+	crossorigin="anonymous">
+<title>Controle de Estoque</title>
+
+<style type="text/css">
+
+/*exibição das imagens*/
+.galeria {
+	width: 5%;
+	text-align: center;
+}
+
+.galeria img:hover {
+	cursor: pointer;
+}
+
+/*backgroud*/
+.bg {
+	position: absolute;
+	background-color: #333;
+	opacity: 0;
+	top: 0;
+	left: 0;
+	display: none;
+	height: 100%;
+	width: 100%;
+}
+
+/*lb*/
+.lb {
+	position: absolute;
+	top: 10%;
+	left: 25%;
+	display: none;
+	border: 10px solid #fff;
+	background: #fff;
+}
+
+.lb img {
+	opacity: 0;
+	width: 500px;
+	height: 500px;
+}
+
+/*close*/
+.close {
+	cursor: poiter;
+	width: 20px;
+	height: 15px;
+	text-align: center;
+	position: absolute;
+	bottom: -1px;
+	right: -8px;
+}
+
+.close span:hover {
+	color: #0069D9;
+}
+</style>
+</head>
+<body>
+
+	<header th:replace="fragments/header :: cabecalho"></header>
+
+	<main class="container">
+		<div class="com-md-12 mt-3">
+			<section>
+				<div style="border-bottom: 1px solid #343A40;">
+					<h2>Consulta de Produtos</h2>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12 mt-3">
+
+						<p>
+							<i class="oi oi-magnifying-glass"></i><span></span>
+							<button class="btn btn-secondary" type="button"
+								data-toggle="collapse" data-target="#collapseNome"
+								aria-controls="collapseNome">Descrição</button>
+							<button class="btn btn-secondary" type="button"
+								data-toggle="collapse" data-target="#collapseCargo"
+								aria-controls="collapseCargo">Categoria</button>
+							<button class="btn btn-secondary" type="button"
+								data-toggle="collapse" data-target="#collapseData"
+								aria-controls="collapseData">Fornecedor</button>
+						</p>
+						
+						<div class="row">
+							<div class="col">
+								<div class="collapse" id="collapseNome">
+
+									<nav class="navbar navbar-light bg-light">
+										<form class="form-inline" method="GET"
+											th:action="@{/produtos/buscar/nome}">
+											<input class="form-control mr-sm-2" type="search"
+												placeholder="nome" aria-label="Search" th:name="nome" />
+											<button class="btn btn-outline-primary my-2 my-sm-0">Pesquisar</button>
+										</form>
+									</nav>
+
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<div class="collapse" id="collapseCargo">
+
+									<nav class="navbar navbar-light bg-light">
+										<form class="form-inline" method="GET"
+											th:action="@{/produtos/buscar/categoria}">
+											<select class="form-control mr-sm-2" th:name="categoria"
+												aria-label="Search">
+												<option th:each="c : ${categorias}" th:value="${c}"
+													th:text="${c.descricao}">Auxiliar Contábil</option>
+
+											</select>
+											<button class="btn btn-outline-primary my-2 my-sm-0">Pesquisar</button>
+										</form>
+									</nav>
+
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<div class="collapse" id="collapseData">
+
+									<nav class="navbar navbar-light bg-light">
+										<form class="form-inline" method="GET"
+											th:action="@{/produtos/buscar/fornecedor}">
+											<select class="form-control mr-sm-2" th:name="idFornecedor" aria-label="Search">
+												<option th:each="forn : ${fornecedores}" th:value="${forn.id}" th:text="${forn.nomeFantasia}">Brasil Peças Importados</option>
+
+											</select>
+											<button class="btn btn-outline-primary my-2 my-sm-0">Pesquisar</button>
+										</form>
+									</nav>
+
+								</div>
+							</div>
+						</div>
+
+
+
+
+						<div th:replace="fragments/alert"></div>
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">Descrição</th>
+									<th scope="col">Imagem</th>
+									<th scope="col">Fornrcedor</th>
+									<th scope="col">Qtd</th>
+									<th scope="col">Preço</th>
+									<th scope="col" colspan="2">Ações</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="prod : ${pageProduto.registros}">
+									<th scope="row" th:text="${prod.id}">1</th>
+									<td style="width: 48%;"
+										th:text="${#strings.abbreviate(prod.descricao,70)}">Bomba
+										de óleo do trator</td>
+									<td class="galeria"><img
+										th:src="@{/produtos/exibeImagem/{imagem}(imagem=${prod.foto})}"
+										width="32"></td>
+									<td
+										th:text="${#strings.abbreviate(prod.fornecedor.nomeFantasia,25)}">Tratortem</td>
+									<td style="width: 5%; text-align: center;"
+										th:text="${prod.quantidade}">10</td>
+									<td style="width: 10%;" th:text="|R$ ${{prod.precoVenda}}|">1.250,00</td>
+									<td style="width: 3%;"><a
+										th:href="@{/produtos/editar/{id}(id=${prod.id})}"
+										title="Editar"> <span class="oi oi-pencil"></span>
+									</a></td>
+									<td style="width: 3%;"><a href="#" title="Excluir"
+										data-toggle="modal" data-target="#myModal"
+										th:id="${'btn_produtos/excluir/' + prod.id}"> <span
+											class="oi oi-trash"></span>
+									</a></td>
+								</tr>
+
+
+							</tbody>
+						</table>
+						<nav aria-label="Navegação de página exemplo">
+							<ul class="pagination justify-content-center">
+								<li class="page-item"><a class="page-link" th:href="@{/produtos/listar(page=${1})}" tabindex="-1">Primeira</a></li>
+								<li th:class="${pageProduto.pagina == 1} ? 'page-item disabled' : 'page-item'"><a class="page-link"
+									th:href="@{/produtos/listar(page=${pageProduto.pagina - 1})}" tabindex="-1">Anterior</a></li>
+								<li class="page-item">
+									<span class="page-link" th:text="|${pageProduto.pagina} de ${pageProduto.totalDePagina}|"></span>
+								</li>
+								<li th:class="${pageProduto.pagina == pageProduto.totalDePagina} ? 'page-item disabled' : 'page-item'"><a class="page-link" 
+									th:href="@{/produtos/listar(page=${pageProduto.pagina + 1})}" >Próximo</a>
+								</li>
+								<li class="page-item"><a class="page-link" th:href="@{/produtos/listar(page=${pageProduto.totalDePagina})}" tabindex="-1">Última</a></li>
+							</ul>
+						</nav>
+					</div>
+
+				</div>
+			</section>
+		</div>
+
+		<div class="bg"></div>
+		<div class="lb">
+			<img alt="" src="">
+			<div class="close">
+				<span class="oi oi-circle-x"></span>
+			</div>
+		</div>
+
+	</main>
+
+	<footer th:replace="fragments/footer :: rodape"></footer>
+
+	<div th:replace="fragments/modal :: modal"></div>
+
+	<script src="/vendor/bootstrap/jquery-3.1.0.js"></script>
+	<script src="/vendor/bootstrap/popper.min.js"></script>
+	<script src="/vendor/bootstrap/bootstrap.min.js"></script>
+
+
+	<script type="text/javascript">
+    
+    	
+    	$(document).ready(function(){
+    		//Efeito LigthBox
+    		$('.galeria img').click(function(){
+    			$('.bg').animate({'opacity':'0.60'}, 500, 'linear');
+    			$('.bg, .lb').css('display', 'block');
+    			
+    			var big = $(this).attr('src');
+    			
+    			$('.lb img').attr('src', big);
+    			$('.lb img').animate({'opacity':'1.00'}, 500, 'linear');
+    		});
+    		
+    		$('.close span').click(function(){
+    			$('.bg, .lb').css('display', 'none');
+    			$('.lb img').css('opacity', '0');
+    		});
+    		
+    		//Ocultar alert
+    	    setTimeout(function(){
+    			$(".alert").fadeOut("slow", function(){
+    				$(this).alert('close');
+    			});
+    		}, 5000);
+    	});
+    	
+    	//Exclusão de produtos
+		var url = '';
+	    
+	    $('a[id*="btn_"]').click(function() {
+	    	url = "/" + $(this).attr('id').split("_")[1];	
+	    	console.log(url);
+	    });
+	    
+	    $('#ok_confirm').click(function() {
+	    	document.location.href = url;	
+	    	console.log("Excluiu");
+	    });
+    </script>
+
+</body>
+</html>
