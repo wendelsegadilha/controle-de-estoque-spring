@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!-- Meta tags Obrigatórias -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/vendor/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.css" crossorigin="anonymous">
+    <title>Controle de Estoque</title>
+  </head>
+  <body>
+    
+    <header th:replace="fragments/header :: cabecalho"></header>
+
+    <main class="container">
+        <div class="com-md-12 mt-3">
+            <section>
+                <div style="border-bottom: 1px solid #343A40;">
+                    <h2>Cadastro de Fornecedores</h2>  
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                    
+                    	<div th:replace="fragments/alert"></div>
+                    	
+                        <form th:action="${fornecedor.id == null} ? @{/fornecedores/salvar} : @{/fornecedores/editar}" method="POST" th:object="${fornecedor}">
+                            
+                            <div class="form-row mt-2">
+                              <div class="col-md-2">
+                                <label for="codigo">Código</label>
+                                <input type="number" class="form-control" id="codigo" readonly>
+                              </div>
+                              <div class="col-md-5">
+                                <label for="nomeFantasia">Nome Fantasia</label>
+                                <input type="text" class="form-control" id="nomeFantasia" 
+                                placeholder="" th:field="*{nomeFantasia}" th:classappend="${#fields.hasErrors('nomeFantasia')} ? 'is-invalid'">
+	                              	<div class="invalid-feedback">
+										<span th:errors="*{nomeFantasia}"></span>
+		                        	</div>
+                              </div>
+                              <div class="col-md-5">
+                                <label for="razaoSocial">Razão Social</label>
+                                <input type="text" class="form-control" id="razaoSocial" 
+                                placeholder="" th:field="*{razaoSocial}" th:classappend="${#fields.hasErrors('razaoSocial')} ? 'is-invalid'">
+	                              	<div class="invalid-feedback">
+										<span th:errors="*{razaoSocial}"></span>
+		                        	</div>
+                              </div>
+                            </div>
+                            
+                            <div class="form-row mt-2">
+                              <div class="col-md-6">
+                                <label for="cnpj">CNPJ</label>
+                                <input type="text" class="form-control" id="cnpj" data-mask="00.000.000/0000-00"
+	                               data-mask-reverse="true" placeholder="" th:field="*{cnpj}" th:classappend="${#fields.hasErrors('cnpj')} ? 'is-invalid'">
+	                              	<div class="invalid-feedback">
+										<span th:errors="*{cnpj}"></span>
+		                        	</div>
+                              </div>
+                              
+                              <div class="col-md-6">
+                                <label for="inscricaoEstadual">Incrição Estadual</label>
+                                <input type="text" class="form-control" id="inscricaoEstadual" data-mask="000.000.000.000" data-mask-reverse="true" 
+                                placeholder="" th:field="*{inscricaoEstadual}" th:classappend="${#fields.hasErrors('inscricaoEstadual')} ? 'is-invalid'">
+	                              	<div class="invalid-feedback">
+										<span th:errors="*{inscricaoEstadual}"></span>
+		                        	</div>
+                              </div>
+                              
+                            </div>
+                            
+                            <div class="form-row mt-2">
+                              <div class="col-md-6">
+                                <label for="email">E-mail</label>
+                                <input type="text" class="form-control" id="email" 
+                                placeholder="" th:field="*{email}" th:classappend="${#fields.hasErrors('email')} ? 'is-invalid'">
+	                              	<div class="invalid-feedback">
+										<span th:errors="*{email}"></span>
+		                        	</div>
+                              </div>
+                              <div class="col-md-3">
+                                <label for="telefone">Telefone</label>
+                                <input type="text" class="form-control" id="telefone" data-mask="(00) 0000-0000"
+                                placeholder="" th:field="*{telefone}" th:classappend="${#fields.hasErrors('telefone')} ? 'is-invalid'">
+	                              	<div class="invalid-feedback">
+										<span th:errors="*{telefone}"></span>
+		                        	</div>
+                              </div>
+                               <div class="col-md-3">
+                                <label for="celular">Celular</label>
+                                <input type="text" class="form-control" id="celular" data-mask="(00) 00000-0000"  
+                                placeholder="" th:field="*{celular}" th:classappend="${#fields.hasErrors('celular')} ? 'is-invalid'">
+	                              	<div class="invalid-feedback">
+										<span th:errors="*{celular}"></span>
+		                        	</div>
+                              </div>
+                            </div>
+                            
+                       
+                           	 <div class="form-group mt-2">
+                                <label for="informacoes">Informações adicionais</label>
+                                <textarea class="form-control" id="informacoes" rows="3" th:field="*{informacoes}"></textarea>
+                              </div>
+                              <input type="hidden" id="id" th:field="*{id}"/>
+                            <div class="form-row mt-4">
+                                <div class="col-md-3 col-xs-12">
+                                    <button type="submit" class="btn btn-primary" style="width: 100%; height: 50px; font-weight: bold;">Cadastrar</button>
+                                </div>
+                            </div>
+                          </form>
+                    </div>
+
+                </div>
+            </section>
+        </div>      
+    </main>
+
+	<footer th:replace="fragments/footer :: rodape"></footer>    
+    <!-- JavaScript (Opcional) -->
+    <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+    <script src="/vendor/bootstrap/jquery-3.1.0.js"></script>
+    <script th:src="@{/webjars/jquery-mask-plugin/dist/jquery.mask.min.js}"></script>
+    <script src="/vendor/bootstrap/popper.min.js"></script>
+    <script src="/vendor/bootstrap/bootstrap.min.js"></script>
+    
+    <script type="text/javascript">
+    $(document).ready(function(){
+		//Ocultar alert
+		setTimeout(function(){
+			$(".alert").fadeOut("slow", function(){
+				$(this).alert('close');
+			});
+		}, 5000);
+		
+	});
+    </script>
+    
+  </body>
+</html>

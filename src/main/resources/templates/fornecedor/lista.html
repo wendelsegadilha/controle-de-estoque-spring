@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="/vendor/bootstrap/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.css"
+	crossorigin="anonymous">
+<title>Controle de Estoque</title>
+
+<style type="text/css">
+
+/*exibição das imagens*/
+.galeria {
+	width: 5%;
+	text-align: center;
+}
+
+.galeria img:hover {
+	cursor: pointer;
+}
+
+/*backgroud*/
+.bg {
+	position: absolute;
+	background-color: #333;
+	opacity: 0;
+	top: 0;
+	left: 0;
+	display: none;
+	height: 100%;
+	width: 100%;
+}
+
+/*lb*/
+.lb {
+	position: absolute;
+	top: 10%;
+	left: 25%;
+	display: none;
+	border: 10px solid #fff;
+	background: #fff;
+}
+
+.lb img {
+	opacity: 0;
+	width: 500px;
+	height: 500px;
+}
+
+/*close*/
+.close {
+	cursor: poiter;
+	width: 20px;
+	height: 15px;
+	text-align: center;
+	position: absolute;
+	bottom: -1px;
+	right: -8px;
+}
+
+.close span:hover {
+	color: #0069D9;
+}
+</style>
+</head>
+<body>
+
+	<header th:replace="fragments/header :: cabecalho"></header>
+
+	<main class="container">
+		<div class="com-md-12 mt-3">
+			<section>
+				<div style="border-bottom: 1px solid #343A40;">
+					<h2>Consulta de Fornecedores</h2>
+				</div>
+				
+				
+				<div class="row">
+					<div class="col-md-12 mt-3">
+
+						<p>
+							<i class="oi oi-magnifying-glass"></i><span></span>
+							<button class="btn btn-secondary" type="button"
+								data-toggle="collapse" data-target="#collapseNomeFantasia"
+								aria-controls="collapseNome">Nome Fantasia</button>
+							<button class="btn btn-secondary" type="button"
+								data-toggle="collapse" data-target="#collapseRazaoSocial"
+								aria-controls="collapseCargo">Razão Social</button>
+						</p>
+						<div class="row">
+							<div class="col">
+								<div class="collapse" id="collapseNomeFantasia">
+									<nav class="navbar navbar-light bg-light">
+										<form class="form-inline" method="GET"
+											th:action="@{/fornecedores/buscar/nomeFantasia}">
+											<input class="form-control mr-sm-2" type="search"
+												placeholder="nome fantasia" aria-label="Search" th:name="nomeFantasia" />
+											<button class="btn btn-outline-primary my-2 my-sm-0">Pesquisar</button>
+										</form>
+									</nav>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<div class="collapse" id="collapseRazaoSocial">
+									<nav class="navbar navbar-light bg-light">
+										<form class="form-inline" method="GET"
+											th:action="@{/fornecedores/buscar/razaoSocial}">
+											<input class="form-control mr-sm-2" type="search"
+												placeholder="razão social" aria-label="Search" th:name="razaoSocial" />
+											<button class="btn btn-outline-primary my-2 my-sm-0">Pesquisar</button>
+										</form>
+									</nav>
+								</div>
+							</div>
+						</div>
+				</div>
+			</div>		
+						<div th:replace="fragments/alert"></div>
+						
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">Nome Fantasia</th>
+									<th scope="col">Razão Social</th>
+									<th scope="col">CNPJ</th>
+									<th scope="col">Insc. Etadual</th>
+									<th scope="col">Telefone</th>
+									<th scope="col" colspan="2">Ações</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="forn : ${pageFornecedor.registros}">
+									<th style="width: 2%" scope="row" th:text="${forn.id}">1</th>
+									<td th:text="${#strings.abbreviate(forn.nomeFantasia,70)}"></td>
+									<td th:text="${#strings.abbreviate(forn.razaoSocial,70)}"></td>
+									<td style="width: 15%" th:text="${forn.cnpj}"></td>
+									<td style="width: 12%" th:text="${forn.inscricaoEstadual}"></td>
+									<td style="width: 15%" th:text="${forn.celular}"></td>
+									<td style="width: 3%;"><a th:href="@{/fornecedores/editar/{id}(id=${forn.id})}" title="Editar"> 
+										<span class="oi oi-pencil"></span>
+									</a></td>
+									<td style="width: 3%;"><a href="#" title="Excluir" data-toggle="modal" data-target="#myModal" th:id="${'btn_fornecedores/excluir/' + forn.id}">
+										<span class="oi oi-trash"></span>
+									</a></td>
+								</tr>
+							</tbody>
+						</table>
+						
+						<nav aria-label="Navegação de página exemplo">
+							<ul class="pagination justify-content-center">
+								<li class="page-item"><a class="page-link" th:href="@{/fornecedores/listar(page=${1})}" tabindex="-1">Primeira</a></li>
+								<li th:class="${pageFornecedor.pagina == 1} ? 'page-item disabled' : 'page-item'"><a class="page-link"
+									th:href="@{/fornecedores/listar(page=${pageFornecedor.pagina - 1})}" tabindex="-1">Anterior</a></li>
+								<li class="page-item">
+									<span class="page-link" th:text="|${pageFornecedor.pagina} de ${pageFornecedor.totalDePagina}|"></span>
+								</li>
+								<li th:class="${pageFornecedor.pagina == pageFornecedor.totalDePagina} ? 'page-item disabled' : 'page-item'"><a class="page-link" 
+									th:href="@{/fornecedores/listar(page=${pageFornecedor.pagina + 1})}" >Próximo</a>
+								</li>
+								<li class="page-item"><a class="page-link" th:href="@{/fornecedores/listar(page=${pageFornecedor.totalDePagina})}" tabindex="-1">Última</a></li>
+							</ul>
+						</nav>
+					</section>
+				</div>
+	</main>
+
+	<footer th:replace="fragments/footer :: rodape"></footer>
+
+	<div th:replace="fragments/modal :: modal"></div>
+
+	<script src="/vendor/bootstrap/jquery-3.1.0.js"></script>
+	<script src="/vendor/bootstrap/popper.min.js"></script>
+	<script src="/vendor/bootstrap/bootstrap.min.js"></script>
+
+
+	<script type="text/javascript">
+    
+    	
+    	$(document).ready(function(){
+    		//Efeito LigthBox
+    		$('.galeria img').click(function(){
+    			$('.bg').animate({'opacity':'0.60'}, 500, 'linear');
+    			$('.bg, .lb').css('display', 'block');
+    			
+    			var big = $(this).attr('src');
+    			
+    			$('.lb img').attr('src', big);
+    			$('.lb img').animate({'opacity':'1.00'}, 500, 'linear');
+    		});
+    		
+    		$('.close span').click(function(){
+    			$('.bg, .lb').css('display', 'none');
+    			$('.lb img').css('opacity', '0');
+    		});
+    		
+    		//Ocultar alert
+    	    setTimeout(function(){
+    			$(".alert").fadeOut("slow", function(){
+    				$(this).alert('close');
+    			});
+    		}, 5000);
+    	});
+    	
+    	//Exclusão de fornecedor
+		var url = '';
+	    
+	    $('a[id*="btn_"]').click(function() {
+	    	url = "/" + $(this).attr('id').split("_")[1];	
+	    	console.log(url);
+	    });
+	    
+	    $('#ok_confirm').click(function() {
+	    	document.location.href = url;	
+	    	console.log("Excluiu");
+	    });
+    </script>
+
+</body>
+</html>
