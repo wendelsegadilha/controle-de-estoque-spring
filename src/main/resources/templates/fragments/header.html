@@ -1,15 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8" /></head>
 <header class="container-fluid" th:fragment="cabecalho">
         <div class="row bg-dark">
             <div class="col-md-12">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <a class="navbar-brand" href="#">WSGC</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegaÁ„o">
+                    <a class="navbar-brand" href="#">CONTROLE DE ESTOQUE</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navega√ß√£o">
                       <span class="navbar-toggler-icon"></span>
                     </button>                  
                     <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
                       <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                          <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(p·gina atual)</span></a>
+                          <a class="nav-link" th:href="@{/}">P√°gina Inicial<span class="sr-only">(p√°gina atual)</span></a>
                         </li>                        
                         <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
                           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -19,8 +22,6 @@
                             <a class="dropdown-item" th:href="@{/clientes/cadastrar}">Clientes</a>
                             <a class="dropdown-item" th:href="@{/fornecedores/cadastrar}">Fornecedores</a>
                             <a class="dropdown-item" th:href="@{/produtos/cadastrar}">Produtos</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">---</a>
                           </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -31,15 +32,10 @@
                             <a class="dropdown-item" th:href="@{/clientes/listar}">Clientes</a>
                             <a class="dropdown-item" th:href="@{/fornecedores/listar}">Fornecedores</a>
                             <a class="dropdown-item" th:href="@{/produtos/listar}">Produtos</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">---</a>
                           </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link disabled" href="#">Desativado</a>
+                            <a class="nav-link" th:href="@{/logout}">Sair</a>
                         </li>
                       </ul>
                      

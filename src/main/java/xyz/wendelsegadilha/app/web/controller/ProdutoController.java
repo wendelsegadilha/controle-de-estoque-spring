@@ -155,6 +155,14 @@ public class ProdutoController {
 		return "produto/lista";
 	}
 	
+	@GetMapping("/buscar/referencia")
+	public String getPorReferencia(@RequestParam("referencia") String referencia, ModelMap model, @RequestParam("page") Optional<Integer> page) {
+		int paginaAtual = page.orElse(1);
+		PaginacaoUtil<Produto> pageProduto = produtoService.buscarPorPaginaReferencia(referencia, paginaAtual);
+		model.addAttribute("pageProduto", pageProduto);
+		return "produto/lista";
+	}
+	
 	@ModelAttribute("fornecedores")
 	public List<Fornecedor> getFornecedores(){
 		return fornecedorService.buscarTodos();

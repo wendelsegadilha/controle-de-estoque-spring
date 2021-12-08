@@ -20,6 +20,9 @@ public class Produto extends AbstractEntity<Long>{
 	@Column(nullable = false)
 	private String descricao;
 	
+	@Column(nullable = true, length = 80, unique = true)
+	private String referencia;
+	
 	@NotNull(message = "Selecione uma categoria relativa ao produto.")
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
@@ -56,6 +59,12 @@ public class Produto extends AbstractEntity<Long>{
 	
 	public String getDescricao() {
 		return descricao;
+	}
+	public String getReferencia() {
+		return referencia;
+	}
+	public void setReferencia(String referencia) {
+		this.referencia = referencia;
 	}
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;

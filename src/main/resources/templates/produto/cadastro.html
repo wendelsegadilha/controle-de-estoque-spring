@@ -31,7 +31,7 @@
                                 <label for="codigo">Código</label>
                                 <input type="number" class="form-control" id="codigo" readonly>
                               </div>
-                              <div class="col-md-10">
+                              <div class="col-md-8">
                                 <label for="descricao">Descrição</label>
                                 <input type="text" class="form-control" id="descricao" 
                                 placeholder="Bomba de óleo..." th:field="*{descricao}" th:classappend="${#fields.hasErrors('descricao')} ? 'is-invalid'">
@@ -39,6 +39,12 @@
 										<span th:errors="*{descricao}"></span>
 		                        	</div>
                               </div>
+                              
+                               <div class="col-md-2">
+                                <label for="descricao">Referência</label>
+                                <input type="text" class="form-control" id="referencia" th:field="*{referencia}">
+                              </div>
+                              
                             </div>
                             <div class="form-row mt-2">
                               <div class="col-md-4">

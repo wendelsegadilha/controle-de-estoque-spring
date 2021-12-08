@@ -70,7 +70,7 @@
 
 	<header th:replace="fragments/header :: cabecalho"></header>
 
-	<main class="container">
+	<main class="container" style="min-height: 450px;">
 		<div class="com-md-12 mt-3">
 			<section>
 				<div style="border-bottom: 1px solid #343A40;">
@@ -91,6 +91,9 @@
 							<button class="btn btn-secondary" type="button"
 								data-toggle="collapse" data-target="#collapseData"
 								aria-controls="collapseData">Fornecedor</button>
+							<button class="btn btn-secondary" type="button"
+								data-toggle="collapse" data-target="#collapseReferencia"
+								aria-controls="collapseReferencia">Referência</button>
 						</p>
 						
 						<div class="row">
@@ -147,6 +150,23 @@
 								</div>
 							</div>
 						</div>
+						
+						<div class="row">
+							<div class="col">
+								<div class="collapse" id="collapseReferencia">
+
+									<nav class="navbar navbar-light bg-light">
+										<form class="form-inline" method="GET"
+											th:action="@{/produtos/buscar/referencia}">
+											<input class="form-control mr-sm-2" type="search"
+												placeholder="referência" aria-label="Search" th:name="referencia" />
+											<button class="btn btn-outline-primary my-2 my-sm-0">Pesquisar</button>
+										</form>
+									</nav>
+
+								</div>
+							</div>
+						</div>
 
 
 
@@ -157,6 +177,7 @@
 								<tr>
 									<th scope="col">#</th>
 									<th scope="col">Descrição</th>
+									<th scope="col">Referência</th>
 									<th scope="col">Imagem</th>
 									<th scope="col">Fornrcedor</th>
 									<th scope="col">Qtd</th>
@@ -167,9 +188,10 @@
 							<tbody>
 								<tr th:each="prod : ${pageProduto.registros}">
 									<th scope="row" th:text="${prod.id}">1</th>
-									<td style="width: 48%;"
+									<td style="width: 40%;"
 										th:text="${#strings.abbreviate(prod.descricao,70)}">Bomba
 										de óleo do trator</td>
+									<td th:text="${prod.referencia}"></td>
 									<td class="galeria"><img
 										th:src="@{/produtos/exibeImagem/{imagem}(imagem=${prod.foto})}"
 										width="32"></td>

@@ -60,6 +60,23 @@ public class ProdutoDao extends AbstractDao<Produto, Long> {
 		return new PaginacaoUtil<>(tamanho, pagina, totalDePaginas, produtos, null);
 		
 	}
+	
+public PaginacaoUtil<Produto> findByReferencia(String referencia, int pagina) {
+		
+		int tamanho = 5;
+		int inicio = (pagina - 1) * tamanho;
+		List<Produto> produtos = getEntityManager().createQuery("select p from Produto p where p.referencia = ?1", Produto.class)
+				.setParameter(1, referencia)
+				.setFirstResult(inicio)
+				.setMaxResults(tamanho)
+				.getResultList();
+		
+		long totalRegistros = produtos.size();
+		long totalDePaginas = (totalRegistros + (tamanho - 1)) / tamanho;
+		
+		return new PaginacaoUtil<>(tamanho, pagina, totalDePaginas, produtos, null);
+		
+	}
 
 	public PaginacaoUtil<Produto> buscaPaginada(int pagina) {
 		int tamanho = 5;

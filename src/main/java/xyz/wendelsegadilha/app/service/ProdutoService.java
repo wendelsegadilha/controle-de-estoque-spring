@@ -57,5 +57,9 @@ public class ProdutoService {
 		return dao.findByFornecedor(idFornecedor, pagina);
 	}
 	
+	public PaginacaoUtil<Produto> buscarPorPaginaReferencia(String referencia, int pagina) {
+		return dao.findByReferencia(referencia, pagina);
+	}
+	
 
 }
