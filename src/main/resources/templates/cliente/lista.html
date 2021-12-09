@@ -131,7 +131,7 @@
 									<th scope="col">CPF</th>
 									<th scope="col">Endereço</th>
 									<th scope="col">Celular</th>
-									<th scope="col" colspan="2">Ações</th>
+									<th scope="col" colspan="2" sec:authorize="hasRole('ROLE_ADMIN')">Ações</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -156,10 +156,10 @@
 	                            		</button>
 									</td>
 									<td th:text="${cli.celular}"></td>
-									<td style="width: 3%;"><a th:href="@{/clientes/editar/{id}(id=${cli.id})}" title="Editar"> 
+									<td style="width: 3%;" sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/clientes/editar/{id}(id=${cli.id})}" title="Editar"> 
 										<span class="oi oi-pencil"></span>
 									</a></td>
-									<td style="width: 3%;"><a href="#" title="Excluir" data-toggle="modal" data-target="#myModal" th:id="${'btn_clientes/excluir/' + cli.id}">
+									<td style="width: 3%;" sec:authorize="hasRole('ROLE_ADMIN')"><a href="#" title="Excluir" data-toggle="modal" data-target="#myModal" th:id="${'btn_clientes/excluir/' + cli.id}">
 										<span class="oi oi-trash"></span>
 									</a></td>
 								</tr>

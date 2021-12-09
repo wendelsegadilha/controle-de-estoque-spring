@@ -204,7 +204,7 @@
 									<th scope="col">Fornrcedor</th>
 									<th scope="col">Qtd</th>
 									<th scope="col">Preço</th>
-									<th scope="col" colspan="2">Ações</th>
+									<th scope="col" colspan="2" sec:authorize="hasRole('ROLE_ADMIN')">Ações</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -232,11 +232,11 @@
 									<td style="width: 5%; text-align: center;"
 										th:text="${prod.quantidade}">10</td>
 									<td style="width: 10%;" th:text="|R$ ${{prod.precoVenda}}|">1.250,00</td>
-									<td style="width: 3%;"><a
+									<td style="width: 3%;" sec:authorize="hasRole('ROLE_ADMIN')"><a
 										th:href="@{/produtos/editar/{id}(id=${prod.id})}"
 										title="Editar"> <span class="oi oi-pencil"></span>
 									</a></td>
-									<td style="width: 3%;"><a href="#" title="Excluir"
+									<td style="width: 3%;" sec:authorize="hasRole('ROLE_ADMIN')"><a href="#" title="Excluir"
 										data-toggle="modal" data-target="#myModal"
 										th:id="${'btn_produtos/excluir/' + prod.id}"> <span
 											class="oi oi-trash"></span>
