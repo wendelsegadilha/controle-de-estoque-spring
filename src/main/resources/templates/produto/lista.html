@@ -83,6 +83,9 @@
 						<p>
 							<i class="oi oi-magnifying-glass"></i><span></span>
 							<button class="btn btn-secondary" type="button"
+								data-toggle="collapse" data-target="#collapseCodigo"
+								aria-controls="collapseCodigo">Código</button>
+							<button class="btn btn-secondary" type="button"
 								data-toggle="collapse" data-target="#collapseNome"
 								aria-controls="collapseNome">Descrição</button>
 							<button class="btn btn-secondary" type="button"
@@ -167,6 +170,24 @@
 								</div>
 							</div>
 						</div>
+						
+						<div class="row">
+							<div class="col">
+								<div class="collapse" id="collapseCodigo">
+
+									<nav class="navbar navbar-light bg-light">
+										<form class="form-inline" method="GET"
+											th:action="@{/produtos/buscar/codigo}">
+											<input class="form-control mr-sm-2" type="search"
+												placeholder="código" aria-label="Search" th:name="codigo" />
+											<button class="btn btn-outline-primary my-2 my-sm-0">Pesquisar</button>
+										</form>
+									</nav>
+
+								</div>
+							</div>
+						</div>
+						
 
 
 
@@ -177,6 +198,7 @@
 								<tr>
 									<th scope="col">#</th>
 									<th scope="col">Descrição</th>
+									<th scope="col">Info.</th>
 									<th scope="col">Referência</th>
 									<th scope="col">Imagem</th>
 									<th scope="col">Fornrcedor</th>
@@ -186,11 +208,21 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="prod : ${pageProduto.registros}">
+								<tr th:each="prod : ${pageProduto.registros}" style="font-size: 13px">
 									<th scope="row" th:text="${prod.id}">1</th>
 									<td style="width: 40%;"
 										th:text="${#strings.abbreviate(prod.descricao,70)}">Bomba
 										de óleo do trator</td>
+										
+									<td style="width: 5%; text-align: center;">
+										<button type="button" class="btn btn-secondary btn-sm" data-container="body"
+		                                    data-toggle="popover" data-placement="top" 
+		                                    th:attr="data-content=${#strings.concat(prod.informacoes)}">
+	                                		<span class="oi oi-eye" title="Visualizar" aria-hidden="true"></span>
+	                            		</button>
+									</td>
+										
+										
 									<td th:text="${prod.referencia}"></td>
 									<td class="galeria"><img
 										th:src="@{/produtos/exibeImagem/{imagem}(imagem=${prod.foto})}"
@@ -254,7 +286,11 @@
 
 
 	<script type="text/javascript">
-    
+	
+	$(function() {
+		$('[data-toggle="popover"]').popover();
+	});
+
     	
     	$(document).ready(function(){
     		//Efeito LigthBox

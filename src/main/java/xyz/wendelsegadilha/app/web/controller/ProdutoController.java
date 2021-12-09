@@ -163,6 +163,14 @@ public class ProdutoController {
 		return "produto/lista";
 	}
 	
+	@GetMapping("/buscar/codigo")
+	public String getPorReferencia(@RequestParam("codigo") Long codigo, ModelMap model, @RequestParam("page") Optional<Integer> page) {
+		int paginaAtual = page.orElse(1);
+		PaginacaoUtil<Produto> pageProduto = produtoService.buscarPorPaginaCodigo(codigo, paginaAtual);
+		model.addAttribute("pageProduto", pageProduto);
+		return "produto/lista";
+	}
+	
 	@ModelAttribute("fornecedores")
 	public List<Fornecedor> getFornecedores(){
 		return fornecedorService.buscarTodos();

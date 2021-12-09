@@ -61,5 +61,9 @@ public class ProdutoService {
 		return dao.findByReferencia(referencia, pagina);
 	}
 	
+	public PaginacaoUtil<Produto> buscarPorPaginaCodigo(Long codigo, int pagina) {
+		return dao.findByCodigo(codigo, pagina);
+	}
+	
 
 }
