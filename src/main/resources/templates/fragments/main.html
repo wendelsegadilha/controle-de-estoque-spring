@@ -1,9 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><meta charset="UTF-8" /></head>
+<head>
+<meta charset="UTF-8" />
+</head>
 <body>
-<main class="container" th:fragment="principal" style="min-height: 465px; background-image: url('images/bg_home.webp'); background-position: -30px;">
-              
-</main>
+	<main class="container" th:fragment="principal"
+		style="min-height: 485px;">
+
+		<div class="com-md-12 mt-3"
+			style="border: 1px dotted #ccc; padding: 10px">
+			<section>
+				<h2 style="border-bottom: 2px solid #000; margin-bottom: 20px">Resumos</h2>
+
+				<div class="card-deck">
+					<div class="card text-white bg-primary mb-3"
+						style="max-width: 33rem;">
+						<div class="card-header">Clientes</div>
+						<div class="card-body">
+							<h6 class="card-title text-center">Quantidade Atual</h6>
+							<p class="card-text text-center"><span style="font-size: 40px;" th:text="${home.qtd_cliente}"></span></p>
+						</div>
+					</div>
+					<div class="card text-white bg-secondary mb-3"
+						style="max-width: 33rem;">
+						<div class="card-header">Fornecedores</div>
+						<div class="card-body">
+							<h6 class="card-title text-center">Quantidade Atual</h6>
+							<p class="card-text text-center"><span style="font-size: 40px;" th:text="${home.qtd_fornecedor}"></span></p>
+						</div>
+					</div><div class="card text-white bg-success mb-3"
+						style="max-width: 33rem;">
+						<div class="card-header">Produtos</div>
+						<div class="card-body">
+							<h6 class="card-title text-center">Quantidade Atual</h6>
+							<p class="card-text text-center"><span style="font-size: 40px;" th:text="${home.qtd_produto}"></span></p>
+						</div>
+					</div>
+				</div>
+
+			</section>
+		</div>
+	</main>
 </body>
 </html>

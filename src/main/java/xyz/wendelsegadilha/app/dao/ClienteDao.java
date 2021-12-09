@@ -24,7 +24,7 @@ public class ClienteDao extends AbstractDao<Cliente, Long> {
 		return new PaginacaoUtil<>(tamanho, pagina, totalDePaginas, produtos, null);
 	}
 	
-	private long count() {
+	public long count() {
 		return getEntityManager().createQuery("select count(*) from Cliente", Long.class).getSingleResult();
 	}
 	

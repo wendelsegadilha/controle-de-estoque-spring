@@ -24,7 +24,7 @@ public class FornecedorDao extends AbstractDao<Fornecedor, Long>{
 		return new PaginacaoUtil<>(tamanho, pagina, totalDePaginas, produtos, null);
 	}
 	
-	private long count() {
+	public long count() {
 		return getEntityManager().createQuery("select count(*) from Fornecedor", Long.class).getSingleResult();
 	}
 	

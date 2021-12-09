@@ -92,7 +92,7 @@ public PaginacaoUtil<Produto> findByReferencia(String referencia, int pagina) {
 		return new PaginacaoUtil<>(tamanho, pagina, totalDePaginas, produtos, null);
 	}
 	
-	private long count() {
+	public long count() {
 		return getEntityManager().createQuery("select count(*) from Produto", Long.class).getSingleResult();
 	}
 
