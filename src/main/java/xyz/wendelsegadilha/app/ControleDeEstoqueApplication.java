@@ -4,15 +4,13 @@ import java.util.Locale;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.FixedLocaleResolver;
 
 @SpringBootApplication
-public class ControleDeEstoqueApplication extends SpringBootServletInitializer implements WebMvcConfigurer{
+public class ControleDeEstoqueApplication implements WebMvcConfigurer{
 
 	
 	public static void main(String[] args) {
@@ -23,7 +21,7 @@ public class ControleDeEstoqueApplication extends SpringBootServletInitializer i
 		 */
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		System.out.print("SENHA: ");
-		System.out.println(encoder.encode("milton2022"));
+		System.out.println(encoder.encode("123"));
 		
 	}
 	
@@ -32,11 +30,4 @@ public class ControleDeEstoqueApplication extends SpringBootServletInitializer i
 		return new FixedLocaleResolver(new Locale("pt","BR"));
 	}
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(ControleDeEstoqueApplication.class);
-	}
-	
-	
-	
 }
