@@ -13,6 +13,8 @@ Esse é um projeto de Controle de Estoque, foi desenvolvido utlilizando as mais 
 - Consulta de Produtos/Clientes/Fornecedores
 - Atualização de Produtos/Clientes/Fornecedores
 - Exclusão de Produtos/Clientes/Fornecedores
+- Filtros de pesquisa
+- Paginação dos resultados das consultas
 - Upload de imagens (foto do produto)
 - Autenticação 
 - Registrição por nível usuário
