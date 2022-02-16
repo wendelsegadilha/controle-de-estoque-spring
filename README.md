@@ -1,8 +1,12 @@
 # Controle de Estoque desenvolvido com Spring Boot 
 
 ### Descrição
+Esse é um projeto de Controle de Estoque, foi desenvolvido utlilizando as mais populares e consolidadas tecnologias do mercado de desenvolvimento de softwares atual. O projeto conta com inúmeras funcionalidades como gerenciamento de clientes, fornecedores, produtos e muito mais. Essa aplicação ainda não se encontra concluída, faltando a implementação de muito outros módulos.
 
-Acesse aqui: [acessar](https://controleestoquespring.herokuapp.com/)
+### Dê uma olhada!
+- Usuário: admin
+- Senha: 123
+- Acesse aqui: [acessar](https://controleestoquespring.herokuapp.com/)
 
 ### Funcionalidades
 - Cadastro de Produtos/Clientes/Fornecedores
