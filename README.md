@@ -35,12 +35,10 @@ Esse é um projeto de Controle de Estoque, foi desenvolvido utlilizando as mais 
 - Banco de Dados MySQL
 
 ### Alguns prints
-![Home](https://user-images.githubusercontent.com/16671438/152072929-41402ad7-b65d-453c-bc9d-018dc29ebf5f.jpg)
+![Login](https://user-images.githubusercontent.com/16671438/154177581-7914ecb7-2182-4a8a-93f1-c6c223c42bbf.jpg)
 
-![Cadastro](https://user-images.githubusercontent.com/16671438/152072989-ba6686a3-9f1e-497c-adca-0c4ff9a1d02b.jpg)
+![Home](https://user-images.githubusercontent.com/16671438/154177642-cc5f05a1-b978-4a7a-b131-78db609da7d5.jpg)
 
-![Consulta](https://user-images.githubusercontent.com/16671438/152073087-0033bb1c-09ff-41f0-8330-45c5adbb1410.jpg)
+![Cadastro de Clientes](https://user-images.githubusercontent.com/16671438/154177685-7e559ccd-627c-4551-9a3e-ddb7c95841be.jpg)
 
-![Informações do Aluno](https://user-images.githubusercontent.com/16671438/152073150-4c6e54b0-7aa4-4cee-b6ab-2a75375da412.jpg)
-
-![Atualização](https://user-images.githubusercontent.com/16671438/152073179-4319ee51-b43c-4dff-9126-1dd8186a4397.jpg)
+![Consulta de Produtos](https://user-images.githubusercontent.com/16671438/154177753-3d11f55f-ed83-424a-b73f-38fb0f548313.jpg)
