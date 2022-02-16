@@ -42,3 +42,6 @@ Esse é um projeto de Controle de Estoque, foi desenvolvido utlilizando as mais 
 ![Cadastro de Clientes](https://user-images.githubusercontent.com/16671438/154177685-7e559ccd-627c-4551-9a3e-ddb7c95841be.jpg)
 
 ![Consulta de Produtos](https://user-images.githubusercontent.com/16671438/154177753-3d11f55f-ed83-424a-b73f-38fb0f548313.jpg)
+
+##E ai dev, vamos bater um papo?
+Linkedin [Linkedin](https://www.linkedin.com/in/wendel-segadilha-490b14199/)
